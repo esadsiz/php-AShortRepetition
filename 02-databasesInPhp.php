@@ -1,9 +1,9 @@
-<?php if (isset($_POST['submit'])) {
+<?php if (isset($_POST['gönder'])) {
       // isset, icine yazili degiskenin tanimli olup olmadigini True ya da False olarak döndürür.
       // Fakat kullanilis amaci genelde ilgili web sayfasindaki formun gönderilip gönderilmedigini kontrol etmektir.
-      // submit'e tiklandi mi? o zaman;
-      $kullaniciadi = $_POST['username'];
-      $sifre = $_POST['password'];
+      // gönder'e tiklandi mi? o zaman;
+      $kullaniciadi = $_POST['kullaniciadi'];
+      $sifre = $_POST['sifre'];
       // formdan cektigimiz verileri bir degiskene attik.
       $baglanti = mysqli_connect("localhost", "root", "", "loginapp");
       // php'yi veritabani ile baglarken bu metodu kullaniriz.
@@ -20,6 +20,16 @@
             // die metodu bastan asagi her seyi sonlandirir.
       }
 
+      // YENI KULLANICI KAYDI
+      $sorgu = "INSERT INTO users(kullaniciadi,sifre) ";
+      $sorgu .= "VALUES ('$kullaniciadi','$sifre')";
+      // Veritabaninda yeni kullanici kaydi olusturmak icin gerekli SQL kodlari. 
+      $sonuc = mysqli_query($baglanti, $sorgu);
+
+      if (!$sonuc) {
+            die("BAGLANAMADI" . mysqli_error($baglanti));
+      }
+
       $yasakliisimler = array("enes", "hilal", "gürcan");
       if ($kullaniciadi && $sifre) {
             // kullaniciadi ve sifre alindiysa, mevcutsa;
@@ -30,9 +40,9 @@
 } ?>
 
 <form action="form.php" method="post">
-      <input type="text" name="username">
-      <input type="password" name="password">
-      <input type="submit" name="submit">
+      <input type="text" name="kullaniciadi">
+      <input type="password" name="sifre">
+      <input type="submit" name="gönder">
 </form>
 <!-- 
 
@@ -45,3 +55,4 @@
 
 
 -->
+
