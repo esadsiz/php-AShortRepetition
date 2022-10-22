@@ -1,0 +1,34 @@
+<?php if (isset($_POST['submit'])) {
+      // isset, icine yazili degiskenin tanimli olup olmadigini True ya da False olarak döndürür.
+      // Fakat kullanilis amaci genelde ilgili web sayfasindaki formun gönderilip gönderilmedigini kontrol etmektir.
+      // submit'e tiklandi mi? o zaman;
+      $kullaniciadi = $_POST['username'];
+      $sifre = $_POST['password'];
+      // formdan cektigimiz verileri bir degiskene attik.
+      echo $kullaniciadi;
+      echo $sifre;
+      echo "calisiyor";
+
+      $yasakliisimler = array("enes", "hilal", "gürcan");
+      if (in_array($kullaniciadi, $yasakliisimler)) {
+            // formdan alinan kullaniciadi, yasakliisimler dizisinde mevcutsa;
+            echo "bunu yap";
+      }
+} ?>
+
+<form action="form.php" method="post">
+      <input type="text" name="username">
+      <input type="password" name="password">
+      <input type="submit" name="submit">
+</form>
+<!-- 
+
+
+
+
+
+
+
+
+
+-->
