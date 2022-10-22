@@ -11,6 +11,16 @@
       // ikinci parametre kullanici adidir.
       // ücüncü parametre sifredir.
       // dördüncü parametre veritabaninda baglanmak istedigimiz tablonun adidir.
+      
+      $kullaniciadi = mysqli_real_escape_string($baglanti, $kullaniciadi);
+      $sifre = mysqli_real_escape_string($baglanti, $sifre);
+      // bunu veritabaninin güvenligi icin yapiyoruz. veritabanina ilgili input üzerinden saldirilmasini engeller. ne oldugunu istersen bir daha bi arastir.
+      
+      $sifrelemeformati = "$2y$10$";
+      $saltsifreleme = "22karakterlikbirsey2222";
+      $sifreyisifrele = $sifrelemeformati . $saltsifreleme;
+      $sifrelenmissifre = crypt($sifre, $sifreyisifrele);
+      
       if ($baglanti) {
             // baglanti kurulduysa, yani True döndüyse.
             echo "bunu yap";
