@@ -137,3 +137,29 @@ while($cekilenveridizisi = mysqli_fetch_assoc($sonuc)){
 
 
 -->
+<?php if (isset($_POST['gonder'])) {
+      $kullaniciadi = $_POST['kullaniciadi'];
+      $sifre = $_POST['sifre'];
+      $kullaniciid = $_POST['kullaniciid'];
+      $baglanti = mysqli_connect("localhost", "root", "", "loginapp");  
+
+      if (!$baglanti) {
+            die("Veritabanina baglanamadi.");
+      }
+
+      // VERI TABANINDAN BILGI OKUMA
+      $sorgu = "DELETE FROM users  WHERE id = '$id' ";
+      // Veritabanindaki verileri güncellemek icin gerekli SQL kodlari. 
+      $sonuc = mysqli_query($baglanti, $sorgu);
+
+      if (!$sonuc) {
+            die("BAGLANAMADI" . mysqli_error($baglanti));
+      }
+?>
+
+<form action="form.php" method="post">
+      <input type="text" name="kullaniciadi">
+      <input type="password" name="sifre">
+      <input type="number" name="kullaniciid">
+      <input type="submit" name="gonder">
+</form>
