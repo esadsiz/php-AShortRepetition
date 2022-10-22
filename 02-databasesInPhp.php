@@ -55,4 +55,48 @@
 
 
 -->
+<?php $baglanti = mysqli_connect("localhost", "root", "", "loginapp");
+      if (!$baglanti) {
+            die("Veritabanina baglanamadi.");
+      }
 
+      // VERI TABANINDAN BILGI OKUMA
+      $sorgu = "SELECT * FROM users";
+      // Veritabaninda bilgi okumak icin gerekli SQL kodlari. 
+      $sonuc = mysqli_query($baglanti, $sorgu);
+
+      if (!$sonuc) {
+            die("BAGLANAMADI" . mysqli_error($baglanti));
+      }
+?>
+
+<?php
+while($cekilenveridizisi = mysqli_fetch_assoc($sonuc)){
+      // mysqli_fetch_assoc metodu, veritabanindan cekilen tabloyu bir dizi seklinde döndürür.
+      // Array(
+      // [id] => 1
+      // [username] => edwin
+      // [password] => superman) seklinde.
+      // yani asagidaki kodlar, cekilen tablodaki her bir satir icin sunu yap demek.
+      $kullaniciid = $cekilenveridizisi["kullaniciid"];
+      print_r($kullaniciid);
+}
+?>
+
+<form action="form.php" method="post">
+      <input type="text" name="kullaniciadi">
+      <input type="password" name="sifre">
+      <input type="number" name="kullaniciid">
+      <input type="submit" name="gönder">
+</form>
+<!-- 
+
+
+
+
+
+
+
+
+
+-->
